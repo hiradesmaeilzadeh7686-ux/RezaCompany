@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="RezaCompany — personal portfolio of Mohammadreza, focused on HTML, CSS and Assembly.">
+  <title>RezaCompany | Mohammadreza</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --panel-2: #171717;
+      --gold: #d8b56a;
+      --gold-light: #f2d99b;
+      --text: #f5f2eb;
+      --muted: #aaa49a;
+      --line: rgba(216,181,106,.22);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(ellipse at 80% 8%, rgba(216,181,106,.10), transparent 34rem),
+        radial-gradient(ellipse at 8% 60%, rgba(216,181,106,.055), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 42px)); margin-inline: auto; }
+    .topline { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8,8,8,.82); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-size: 1.15rem; font-weight: 850; letter-spacing: .13em; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .menu-btn { display: none; color: var(--gold); border: 1px solid var(--line); background: transparent; padding: 8px 12px; border-radius: 8px; font-size: 1.1rem; }
+    .hero { min-height: 690px; display: grid; align-items: center; padding: 100px 0 115px; position: relative; }
+    .hero::after {
+      content: ""; position: absolute; width: 360px; height: 360px; right: 4%; top: 22%;
+      border: 1px solid rgba(216,181,106,.15); border-radius: 50%;
+      box-shadow: 0 0 0 34px rgba(216,181,106,.025), 0 0 0 68px rgba(216,181,106,.018);
+      pointer-events: none;
+    }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .25em; font-size: .75rem; font-weight: 750; }
+    h1 { font-size: clamp(3.1rem, 8vw, 6.8rem); line-height: .98; letter-spacing: -.065em; margin: 22px 0; max-width: 820px; position: relative; z-index: 1; }
+    h1 span { color: var(--gold); }
+    .hero-copy { color: var(--muted); max-width: 580px; font-size: 1.08rem; margin-bottom: 32px; position: relative; z-index: 1; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; position: relative; z-index: 1; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 13px 21px; border-radius: 8px; font-weight: 750; font-size: .9rem; transition: transform .2s, background .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--gold); color: #100e09; }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline { border: 1px solid var(--line); color: var(--text); }
+    .btn-outline:hover { border-color: var(--gold); }
+    section { padding: 92px 0; }
+    .section-head { margin-bottom: 38px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.045em; margin-top: 8px; }
+    .section-head p { color: var(--muted); max-width: 650px; margin-top: 10px; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+    .panel { background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)); border: 1px solid var(--line); border-radius: 16px; padding: 30px; }
+    .panel p { color: var(--muted); }
+    .persian { direction: rtl; text-align: right; font-family: Tahoma, Arial, sans-serif; }
+    .mini-label { color: var(--gold); font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; font-weight: 800; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat { background: var(--panel-2); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 20px; }
+    .stat strong { display: block; color: var(--gold); font-size: 1.55rem; }
+    .stat span { color: var(--muted); font-size: .82rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill { min-height: 210px; transition: transform .25s, border-color .25s; }
+    .skill:hover { transform: translateY(-6px); border-color: rgba(216,181,106,.65); }
+    .skill-number { color: var(--gold); font-size: .78rem; letter-spacing: .15em; }
+    .skill h3 { font-size: 1.45rem; margin: 18px 0 8px; }
+    .skill p { color: var(--muted); font-size: .92rem; }
+    .skill-tag { display: inline-block; color: var(--gold-light); border: 1px solid var(--line); padding: 5px 10px; border-radius: 99px; font-size: .72rem; margin-top: 18px; }
+    .contact-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; }
+    .contact-list { display: grid; gap: 12px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; padding: 16px; background: var(--panel-2); border: 1px solid rgba(255,255,255,.07); border-radius: 12px; }
+    .contact-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 10px; color: var(--gold); background: rgba(216,181,106,.10); font-weight: 900; }
+    .contact-item small { display: block; color: var(--muted); }
+    .contact-item strong { font-size: .92rem; overflow-wrap: anywhere; }
+    .contact-item:hover { border-color: var(--gold); }
+    .contact-note { display: flex; flex-direction: column; justify-content: center; }
+    .contact-note h3 { font-size: 1.8rem; margin-bottom: 12px; }
+    .contact-note p { color: var(--muted); margin-bottom: 22px; }
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 25px 0; color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .gold { color: var(--gold); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 760px) {
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; padding: 22px; background: #0c0c0c; border-bottom: 1px solid var(--line); flex-direction: column; gap: 18px; }
+      .nav-links.open { display: flex; }
+      .hero { min-height: 600px; padding: 85px 0; }
+      .hero::after { width: 190px; height: 190px; right: -70px; top: 15%; }
+      .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 0; }
+      .panel { padding: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home">REZA<span>COMPANY</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div>
+        <div class="eyebrow">Independent developer · Creative mind</div>
+        <h1>Building ideas<br>into <span>digital reality.</span></h1>
+        <p class="hero-copy">I'm Mohammadreza — a developer exploring the power of HTML, CSS and Assembly. I create clean, purposeful digital experiences with a focus on detail.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact">Let's connect ↗</a>
+          <a class="btn btn-outline" href="#skills">Explore my skills</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">01 / About</div>
+          <h2>A little about me.</h2>
+          <p>Curiosity, precision and a passion for technology — the foundation behind every project.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel reveal">
+            <div class="mini-label">My approach</div>
+            <p>I enjoy understanding how things work and turning ideas into practical digital solutions. From structuring web pages to styling interfaces and exploring low-level programming, I'm always learning and building.</p>
+            <p class="persian" lang="fa" style="margin-top:22px">من محمدرضا هستم؛ علاقه‌مند به برنامه‌نویسی، طراحی وب و یادگیری فناوری. هدفم ساخت تجربه‌های دیجیتال ساده، کاربردی و حرفه‌ای است.</p>
+          </div>
+          <div class="stats reveal">
+            <div class="stat"><strong>HTML</strong><span>Web structure</span></div>
+            <div class="stat"><strong>CSS</strong><span>Visual design</span></div>
+            <div class="stat"><strong>ASM</strong><span>Low-level logic</span></div>
+            <div class="stat"><strong>∞</strong><span>Always learning</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">02 / What I do</div>
+          <h2>Skills & interests.</h2>
+          <p>Three areas that shape my journey in software and digital creation.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="panel skill reveal">
+            <div class="skill-number">01 — STRUCTURE</div>
+            <h3>HTML</h3>
+            <p>Building semantic, accessible page structures and organizing content for the web.</p>
+            <span class="skill-tag">Web foundations</span>
+          </article>
+          <article class="panel skill reveal">
+            <div class="skill-number">02 — DESIGN</div>
+            <h3>CSS</h3>
+            <p>Creating responsive layouts, visual systems, smooth interactions and polished interfaces.</p>
+            <span class="skill-tag">Responsive styling</span>
+          </article>
+          <article class="panel skill reveal">
+            <div class="skill-number">03 — LOW LEVEL</div>
+            <h3>Assembly</h3>
+            <p>Exploring computer architecture, instructions, memory and the fundamentals of low-level programming.</p>
+            <span class="skill-tag">Systems & logic</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">03 / Get in touch</div>
+          <h2>Let's make a connection.</h2>
+          <p>Have an idea, a question or a project in mind? Reach out through any of the channels below.</p>
+        </div>
+        <div class="contact-wrap">
+          <div class="contact-list reveal">
+            <a class="contact-item" href="https://wa.me/989389332443" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon">W</span><span><small>WhatsApp</small><strong>+98 938 933 2443</strong></span>
+            </a>
+            <a class="contact-item" href="tel:+989389332443">
+              <span class="contact-icon">☎</span><span><small>Phone</small><strong>+98 938 933 2443</strong></span>
+            </a>
+            <a class="contact-item" href="mailto:mohammadrezaesm4@gmail.com">
+              <span class="contact-icon">@</span><span><small>Email</small><strong>mohammadrezaesm4@gmail.com</strong></span>
+            </a>
+          </div>
+          <div class="panel contact-note reveal">
+            <div class="mini-label">Open to connections</div>
+            <h3>Have something in mind?</h3>
+            <p>I'm always glad to connect with people who enjoy technology, creativity and building useful things.</p>
+            <a class="btn btn-primary" href="mailto:mohammadrezaesm4@gmail.com?subject=Hello%20from%20your%20website">Send me an email ↗</a>
+            <p class="persian" lang="fa" style="margin:20px 0 0">برای همکاری، گفتگو یا شروع یک ایده جدید، خوشحال می‌شوم با من در ارتباط باشید.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> <span class="gold">RezaCompany</span>. All rights reserved.</span>
+      <span>Designed with purpose · Built with curiosity</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '×' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+  </script>
+</body>
+</html>
